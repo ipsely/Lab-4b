@@ -1,31 +1,60 @@
 #include <iostream>
 using namespace std;
 
-int evenorodd(int a,int b);
-
-
+int maximum (int arr[],int j,int l);
+int minimum(int arr[],int j,int l);
 int main() {
-	
-    int a,b;  
-    cout<<"enter the intervals\n";
-    cin>>a>>b;
-    evenorodd(a,b);
-    return 0;
-}
-  
-int evenorodd(int a,int b)
-{
-	if(b<a)
-	  return 0;
-	if(a%2==0)
-	{ 
-		cout<<a<<" ";
-             	evenorodd(a+2,b);
-		
-	}
-	else 
+	int n,arr[100],i,max,min;
+	cout<<"enter the nuber of elemnts in an array\n";
+	cin>>n;
+	cout<<"enter "<<n<<" elements of array\n";
+	for(i=0;i<n;i++)
 	{
-		cout<<a<<" ";
-		evenorodd(a+2,b);
+		cin>>arr[i];
 	}
+	max= maximum(arr,0,n);
+	min=minimum(arr,0,n);
+	cout<<"the maximum is "<<max<<" and the minimum is "<<min;
+	return 0;
+}
+
+
+
+int minimum(int arr[], int j, int l)
+{
+    int min;
+
+    if(j >= l-2)
+    {
+        if(arr[j] < arr[j + 1])
+            return arr[j];
+        else
+            return arr[j + 1];
+    }
+
+    min = minimum(arr, j + 1, l);
+
+    if(arr[j] < min)
+        return arr[j];
+    else
+        return min;
+}
+int maximum(int arr[], int j, int l)
+{
+    int max;
+
+    if(j >= l-2)
+    {
+        if(arr[j] > arr[j + 1])
+            return arr[j];
+        else
+            return arr[j + 1];
+    }
+
+    max = maximum(arr, j + 1, l);
+
+    if(arr[j] > max)
+        return arr[j];
+    else
+        return max;
 }
